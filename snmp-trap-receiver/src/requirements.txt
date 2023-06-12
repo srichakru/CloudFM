@@ -1,0 +1,4 @@
+pysnmp
+google
+google-cloud
+google-cloud-pubsub

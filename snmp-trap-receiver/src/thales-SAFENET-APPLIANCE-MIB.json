@@ -1,0 +1,41 @@
+{"thales-SAFENET-APPLIANCE-MIB_userSeverityAndType" :
+    {
+        "0":"1,2",
+        "1":"2,13",
+        "2":"2,13",
+        "3":"3,13",
+        "4":"4,13",
+        "5":"5,13"
+    },
+"thales-SAFENET-APPLIANCE-MIB_sev":
+    {
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-cryptoAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-clockAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-fanAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-ntlsAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-motherboardAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-powerSupplyAttentionNotify":"3,1,0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-diskDriveAttentionNotify":"3,1,0"
+    },
+"thales-SAFENET-APPLIANCE-MIB_userX733ProbableCause" : 
+     {
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-fanAttentionNotify":"100146",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-powerSupplyAttentionNotify":"100115",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-motherboardAttentionNotify":"4010",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-diskDriveAttentionNotify":"100101",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-ntlsAttentionNotify":"1009",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-cryptoAttentionNotify":"4003",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-clockAttentionNotify":"100208"
+    },
+"thales_preclass":
+    {
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-fanAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-powerSupplyAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-motherboardAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-diskDriveAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-ntlsAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-cryptoAttentionNotify":"0",
+        "SNMPTRAP-SAFENET-APPLIANCE-MIB-clockAttentionNotify":"0",
+        "SNMPTRAP-CHRYSALIS-UTSP-MIB-ntlsCertExpireNotify":"0"
+    }
+}

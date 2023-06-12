@@ -1,0 +1,4 @@
+flask
+google
+google-cloud
+google-cloud-pubsub

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mongo-db-382501",
+  "private_key_id": "683662900e461a8cf642d99f77c8ce8c800adcbc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDZQD6bYgxIBr81\nOaJKFErgxWzdOIpQlGxTPG3m3E/a5d7etx/Wk9DbhGJmjUcRNOurzEphbBQX/xWZ\nYlJ/rcC0wMEGq6L7v32sBauTNgg0ilytyb7e3w28+biPSz8F3rk/ZngojglOMJnP\nsxjWOlA8/dYHOL+GDM82KSR8AFn9IiZ/I60vwc7ApB1Ehla4YD7getPjfVrpC2U6\nu/608CM9O3DH2OJWsqOVtV8EvdojJDUd4RHr241a8qD5Q2qnL4jLEi14YS3WzkjU\nUdAdpO5QEGnaE217DxgTjTf1sC3kS1rBkfO6NxVLLd3EpuLaU6wblcX71UvwTSpg\nN6ULmpIzAgMBAAECggEAAIKXHsbgXGvU979+QpaY3tM5ZrfqtHyOhsPSrlySJ9Gg\ndMw4hFqbit9k1SNF9Kb2mGw+h8OIz0JkBUP7BN8AxI/1MglH6ZfwCpfdyO+uaOZD\njnoSw8Imy3IwUBeFGN3z3pojXPzSI0HyskR5yLC8jnci95jmsMWH9Wb0pnwR/kou\nppHcmArO+5ju6PpnlBLY1OAInM5yuYIydu8NiNsVvDA2+uaV0gn8sYTgBY+Ef3fA\nU6qLe1ZU8Za5Zgo03yFM3AmSn8oEBXm9YMuKeD6MnzGSAojJzXagpcF8ZSSly3Vl\nH6Lw6HjUjBe9iiWeK/5rPXl3X2KPI3cnJ6+YhKk2IQKBgQD4ZRHVFHRWL6yOvYhQ\nRZ5hQ9/LAXqbPyCd98qSlL5rF6qnY/BcdfYqwWr93MxRS9+fM3+YqkOHKQ+QpHsg\ncqJWeImF/xvExaDOedZbniytYw6iol6Xm95L4cqMxk98v3nIO9L1WNf8b9ouriM2\nfOE2LRVEjyGy05ieVUSPu4x+IwKBgQDf5xFj79BEezU5DkR41UJxHUx3+UKsnqJS\nMyPm0XBn9hSinPYYAsqzGZFtYxD8Ff+2VNThtq1ikfBnT4A1G43PCOOqZohHa/5A\n/h8x6J3m2sfwrvPx2uLB8CovUNm49mBY8LueF734TEjU+R/h8XNfQJ3jRM76UK26\nRBjnvKr0sQKBgQDwJb781B65qLPa+PEOMpCyFs4J1a804u5k60llN/t1TFdIKH4c\n1kseAQuwzkSXIJTdtQtajNpmlVMgE3Wa5FmA4l6LNx4gurUCipas0xr8svVWVUbA\nqwhbMrwCKER3JiPWa8hEPhXrUDSPxvnyVv/hwep68yqwWpSGF4gGsltdIwKBgHXy\n57pZrsEklpkD5xYwYdvsr0fUS0dcGe5relIxqqFZhO1U+l8TuWw33+Bb+6qQfDC0\n56Av946hip8hxkwzw7R43lX5xXi6byoVtKE6BVSDlCg6Qc/6mtHHjrF2Sfuh7odr\n6aoSn8SZixSGWEFSTJC1HXeH2/EJZztkfCo3vWdBAoGAYhfjGSKv/fCIrLzdfhXy\n/aXcM6QZYEXHggvw2IpGL6w4albH0WqhIhiuuBEeD9jFx9deJROAiRHNC36c5Cy7\n17yFTFHA/+3Z/Xy5Y1EqKoo0XC9uTHwle+L/MQzNk3+abqMmQstNEX/t/oFoXuew\nLQcZqZYVvwKQB+Uf7/e7Ygw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mongo-db-pub-sub@mongo-db-382501.iam.gserviceaccount.com",
+  "client_id": "100519474007938039914",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mongo-db-pub-sub%40mongo-db-382501.iam.gserviceaccount.com"
+}
+

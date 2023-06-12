@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: huawei-ows-http-collect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: huawei-ows-http-collect
+  template:
+    metadata:
+      labels:
+        app: huawei-ows-http-collect
+    spec:
+      containers:
+      - env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        - name: PORT
+          value: "6019"
+        image: europe-west1-docker.pkg.dev/mongo-db-382501/huawei-ows-http-collect-repo/huawei-ows-http-collect-gke:latest
+        imagePullPolicy: Always
+        name: huawei-ows-http-collect
+        ports:
+        - containerPort: 6019
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 500m
+            ephemeral-storage: 1Gi
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /var/secrets/google
+          name: google-cloud-key
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: pubsub-key
+

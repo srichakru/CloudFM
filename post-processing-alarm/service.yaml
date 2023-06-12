@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: huawei-ows-http-collect
+spec:
+  type: LoadBalancer
+  selector:
+    app: huawei-ows-http-collect
+  ports:
+  - port: 6019
+    targetPort: 6019

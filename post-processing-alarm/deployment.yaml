@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-processing-alarm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-processing-alarm
+  template:
+    metadata:
+      labels:
+        app: post-processing-alarm
+    spec:
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: pubsub-key
+      containers:
+      - name: post-processing-alarm
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
+        image: europe-west1-docker.pkg.dev/mongo-db-382501/post-processing-alarm-repo/post-processing-alarm-gke:latest
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        - name: PORT
+          value: "6108"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"

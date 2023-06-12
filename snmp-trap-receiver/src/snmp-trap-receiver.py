@@ -1,0 +1,139 @@
+from pysnmp import debug
+from pysnmp.entity import config,engine
+from pysnmp.carrier.asyncore.dgram import udp
+from pysnmp.entity.rfc3413 import ntfrcv
+from pysnmp.proto.api import v2c
+import json
+import PublishToPubSub
+import logging
+import re
+import parse_alarm_main
+
+
+#from pysnmp.hlapi import *
+#FORMAT = '%(asctime)s %(clientip)-15s %(user)-8s %(message)s'
+conf=parse_alarm_main.Setting('alarm-collect-settings.cfg')
+logFile = conf.get_setting('MAIN', "logFile")
+host=conf.get_setting('MAIN', "host")
+port= conf.get_setting('MAIN',"port")
+pubSubTopic = conf.get_setting("PUBSUB", "post_processing_topic_id")
+pubSubproject = conf.get_setting("PUBSUB", "project_id")
+lookup_dict = parse_alarm_main.get_lookups(conf.get_setting("INTEGRATION", "IntegrationLookupJson"))
+alarmFields = parse_alarm_main.get_lookups(conf.get_setting('MAIN', "AlarmFieldsJson"))
+logging.basicConfig(filename=logFile, level=logging.DEBUG,format="%(asctime)s %(message)s")
+
+#debug.setLogger(debug.Debug("all"))
+#address4="192.168.31.84"
+#address4="172.29.222.68"
+address4=host
+community_string=conf.get_setting('MAIN',"community_string")
+listenPort=port
+agent=conf.get_setting('MAIN',"agent")
+user=conf.get_setting('MAIN',"user")
+user_auth_key=conf.get_setting('MAIN',"user_auth_key")
+user_priv_key=conf.get_setting('MAIN',"user_priv_key")
+engineId=conf.get_setting('MAIN',"engineId")
+
+
+logging.debug("Agent is listening SNMP Trap on "+address4+" , Port : " +str(listenPort))
+logging.debug('--------------------------------------------------------------------------')
+
+
+
+
+
+
+def cbFun(snmpEngine, stateReference, contextEngineId, contextName,
+          varBinds, cbCtx):
+    logging.debug("Received new Trap message")
+    execContext = snmpEngine.observer.getExecutionContext(
+        'rfc3412.receiveMessage:request'
+    )
+
+    for keys , values in execContext.items():
+        logging.debug("execContext["+str(keys)+"] = " + str(values))
+
+
+    networkTrap = parse_alarm_main.SnmpTrap(varBinds,execContext["transportAddress"][0])
+    networkTrap.convertv2_to_v1()
+    networkTrap.set_default_alarm_fields(alarmFields)
+    networkTrap.parse_alarm_main(conf)
+    import thales_generic_snmp
+    thales_generic_snmp.parse_alarm(conf,networkTrap,lookup_dict)
+    networkTrap.set_update_fields(alarmFields)
+    messageToPublish={"Alarm":networkTrap.BasicParsedAlarm,"updatedFields":networkTrap.UpdateFields}
+    logging.debug("Message to publish - " + str(messageToPublish))
+
+    res=PublishToPubSub.sendTopubSubTopic(messageToPublish,pubSubproject,pubSubTopic)
+    if res:
+        logging.debug("Data published to Pubsub : " + res)
+
+
+
+
+
+
+if __name__ == "__main__":
+    snmpEngine = engine.SnmpEngine()
+
+    # Setup transport endpoint
+    config.addSocketTransport(
+        snmpEngine,
+        udp.domainName,
+        udp.UdpSocketTransport().openServerMode((address4,int(listenPort))),
+    )
+    """
+    config.addSocketTransport(
+        snmpEngine,
+        udp6.domainName,
+        udp6.Udp6SocketTransport().openServerMode(address6),
+    )
+    """
+    logging.debug(
+        "SNMP Trap; listening; msg=SNMP Trap daemon listening on UDP address %s and %s",
+        address4,str(port)
+    )
+
+    # v1/2 setup
+    config.addV1System(snmpEngine, agent, community_string)
+    logging.debug("SNMP Trap; registering; Registered agent %s", agent)
+    # v3 setup
+    config.addV3User(
+        snmpEngine,
+        user,
+        config.usmHMACMD5AuthProtocol,
+        user_auth_key,
+        config.usmDESPrivProtocol,
+        user_priv_key,
+        securityEngineId=v2c.OctetString(hexValue=engineId)
+    )
+    logging.debug("SNMP Trap; registering; Registered snmp v3 user %s", user)
+
+
+    """
+    snmpEngine = getSNMPEngine(
+        address4,
+        address6,
+        app_config["snmpv12_agents"],
+        app_config["SNMPv3_users"],
+    )
+    """
+    """
+    cbCtx = {
+        "out_wire": snmptrapd_out,
+        "MIBView": getMIBViewer(
+            app_config["mib_dir"], app_config["mib_modules_record"]
+        ),
+        "app_config": app_config,
+        "last_col_ts": 0,
+        "log_counter": 0,
+    }
+    """
+    ntfrcv.NotificationReceiver(snmpEngine, cbFun)
+
+    snmpEngine.transportDispatcher.jobStarted(1)  # this job would never finish
+    try:
+        snmpEngine.transportDispatcher.runDispatcher()
+    except:
+        snmpEngine.transportDispatcher.closeDispatcher()
+        raise

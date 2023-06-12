@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"huawei-ows-http-collect","namespace":"default"},"spec":{"ports":[{"port":6019,"targetPort":6019}],"selector":{"app":"huawei-ows-http-collect"},"type":"LoadBalancer"}}
+  creationTimestamp: "2023-04-16T09:20:06Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:allocateLoadBalancerNodePorts: {}
+        f:externalTrafficPolicy: {}
+        f:internalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":6019,"protocol":"TCP"}:
+            .: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2023-04-16T09:20:05Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .: {}
+          v:"service.kubernetes.io/load-balancer-cleanup": {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: kube-controller-manager
+    operation: Update
+    subresource: status
+    time: "2023-04-16T09:20:44Z"
+  name: huawei-ows-http-collect
+  namespace: default
+  resourceVersion: "210398"
+  uid: 4bb9f35b-0df0-4342-b6e6-1c928f495575
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.39.3.57
+  clusterIPs:
+  - 10.39.3.57
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31196
+    port: 6019
+    protocol: TCP
+    targetPort: 6019
+  selector:
+    app: huawei-ows-http-collect
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.78.21.161

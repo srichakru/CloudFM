@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: snmp-trap-receiver
+spec:
+  type: NodePort
+  selector:
+    app: snmp-trap-receiver
+  ports:
+  - port: 163
+    targetPort: 163
+    protocol: UDP

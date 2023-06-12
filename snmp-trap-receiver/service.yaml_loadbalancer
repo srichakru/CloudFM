@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: snmp-trap-receiver-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: snmp-trap-receiver-gke
+  ports:
+  - port: 163
+    targetPort: 163
+    protocol: UDP

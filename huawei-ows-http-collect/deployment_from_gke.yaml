@@ -1,0 +1,215 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    autopilot.gke.io/resource-adjustment: '{"input":{"containers":[{"limits":{"cpu":"500m","memory":"512Mi"},"name":"huawei-ows-http-collect"}]},"output":{"containers":[{"limits":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"512Mi"},"requests":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"512Mi"},"name":"huawei-ows-http-collect"}]},"modified":true}'
+    deployment.kubernetes.io/revision: "10"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"huawei-ows-http-collect","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"huawei-ows-http-collect"}},"template":{"metadata":{"labels":{"app":"huawei-ows-http-collect"}},"spec":{"containers":[{"env":[{"name":"PORT","value":"6019"}],"image":"europe-west1-docker.pkg.dev/mongo-db-382501/huawei-ows-http-collect-repo/huawei-ows-http-collect-gke:latest","name":"huawei-ows-http-collect","ports":[{"containerPort":6019}],"resources":{"limits":{"cpu":"500m","memory":"512Mi"}}}]}}}}
+  creationTimestamp: "2023-04-16T09:19:12Z"
+  generation: 11
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:progressDeadlineSeconds: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:strategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+          f:type: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              .: {}
+              f:app: {}
+          f:spec:
+            f:containers:
+              k:{"name":"huawei-ows-http-collect"}:
+                .: {}
+                f:env: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":6019,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources:
+                  .: {}
+                  f:limits:
+                    .: {}
+                    f:cpu: {}
+                    f:memory: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2023-04-16T09:19:12Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:replicas: {}
+        f:template:
+          f:spec:
+            f:containers:
+              k:{"name":"huawei-ows-http-collect"}:
+                f:env:
+                  k:{"name":"GOOGLE_APPLICATION_CREDENTIALS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:volumeMounts:
+                  .: {}
+                  k:{"mountPath":"/var/secrets/google"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:volumes:
+              .: {}
+              k:{"name":"google-cloud-key"}:
+                .: {}
+                f:name: {}
+                f:secret:
+                  .: {}
+                  f:defaultMode: {}
+                  f:secretName: {}
+    manager: kubectl-edit
+    operation: Update
+    time: "2023-04-17T11:58:10Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    subresource: status
+    time: "2023-04-21T02:37:57Z"
+  name: huawei-ows-http-collect
+  namespace: default
+  resourceVersion: "4744289"
+  uid: b8ddcc42-011a-4240-98af-f272f179726b
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: huawei-ows-http-collect
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: huawei-ows-http-collect
+    spec:
+      containers:
+      - env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        image: europe-west1-docker.pkg.dev/mongo-db-382501/huawei-ows-http-collect-repo/huawei-ows-http-collect-gke:7.0
+        imagePullPolicy: Always
+        name: huawei-ows-http-collect
+        ports:
+        - containerPort: 6019
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            ephemeral-storage: 1Gi
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 1Gi
+            memory: 512Mi
+        securityContext:
+          capabilities:
+            drop:
+            - NET_RAW
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/secrets/google
+          name: google-cloud-key
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoSchedule
+        key: kubernetes.io/arch
+        operator: Equal
+        value: amd64
+      volumes:
+      - name: google-cloud-key
+        secret:
+          defaultMode: 420
+          secretName: mongo-db-proj-key
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2023-04-16T09:19:12Z"
+    lastUpdateTime: "2023-04-21T02:12:45Z"
+    message: ReplicaSet "huawei-ows-http-collect-54675c9bd4" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2023-04-21T02:37:57Z"
+    lastUpdateTime: "2023-04-21T02:37:57Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 11
+  readyReplicas: 2
+  replicas: 2
+  updatedReplicas: 2
